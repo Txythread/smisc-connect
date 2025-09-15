@@ -19,8 +19,4 @@ enum ElectricalState {
 
 /// Start the clock and send data_tx continuously
 fn create_transmission_process(bus: &mut BusInfo, hertz: u8, data_tx: &mut u8){
-    let bus_info: Arc<Mutex<BusInfo>> = Arc::new(Mutex::new(bus.clone()));
-    let process = spawn({
-        bus_info.
-    });
 }
