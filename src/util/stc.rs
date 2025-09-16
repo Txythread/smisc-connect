@@ -377,15 +377,16 @@ impl STCValue {
             STCValue::Newline =>                0b1110_1000,
             STCValue::Remove =>                 0b1110_1001,
             STCValue::Tab =>                    0b1110_1010,
-            STCValue::Modifier0 =>              0b1110_1010,
+            STCValue::Modifier0 =>              0b1111_0011,
             STCValue::Modifier1 =>              0b1110_1011,
             STCValue::Modifier2 =>              0b1110_1100,
             STCValue::Space =>                  0b1110_1110,
 
-            STCValue::StandardOutput =>         0b1110_1110,
-            STCValue::StandardInput =>          0b1110_1111,
-            STCValue::Formatting =>             0b1110_1000,
-            STCValue::Data =>                   0b1110_1001,
+            STCValue::StandardOutput =>         0b1110_1111,
+            STCValue::StandardInput =>          0b1111_0000,
+            STCValue::Formatting =>             0b1111_0001,
+            STCValue::Data =>                   0b1111_0010,
+            // 1111_0011 reserved for modifier 0
         }
     }
 
@@ -479,13 +480,19 @@ impl STCValue {
             0b1110_0110 => Some(STCValue::ParenthesesCurlyOpen),
             0b1110_0111 => Some(STCValue::ParenthesesCurlyClose),
 
-            0b1110_1000 => Some(STCValue::Newline),      // ⚠ ambiguous with Formatting
-            0b1110_1001 => Some(STCValue::Remove),       // ⚠ ambiguous with Data
-            0b1110_1010 => Some(STCValue::Tab),          // ⚠ ambiguous with Modifier0
+            /*STCValue::StandardOutput =>         0b1110_1111,
+            STCValue::Data =>                   0b1111_0010,*/
+            0b1110_1000 => Some(STCValue::Newline),
+            0b1110_1001 => Some(STCValue::Remove),
+            0b1110_1010 => Some(STCValue::Tab),
+            0b1111_0011 => Some(STCValue::Modifier0),
             0b1110_1011 => Some(STCValue::Modifier1),
             0b1110_1100 => Some(STCValue::Modifier2),
-            0b1110_1110 => Some(STCValue::Space),        // ⚠ ambiguous with StandardOutput
-            0b1110_1111 => Some(STCValue::StandardInput),
+            0b1110_1110 => Some(STCValue::Space),
+            0b1110_1111 => Some(STCValue::StandardOutput),
+            0b1111_0000 => Some(STCValue::StandardInput),
+            0b1111_0001 => Some(STCValue::Formatting),
+            0b1111_0010 => Some(STCValue::Data),
 
             _ => None,
         }
