@@ -1,5 +1,6 @@
 // Stupid Text Code
 
+#[derive(Debug)]
 pub enum STCValue {
     // 0 1 2 3 4 5 6 7 8 9
     Zero,
@@ -80,7 +81,7 @@ pub enum STCValue {
     Plus,
     Minus,
     Asterisk,
-    Dash,
+    EmDash,
     Underscore,
     Hashtag,
 
@@ -187,7 +188,7 @@ impl STCValue {
             STCValue::Plus => Some('+'),
             STCValue::Minus => Some('-'),
             STCValue::Asterisk => Some('*'),
-            STCValue::Dash => Some('-'),
+            STCValue::EmDash => Some('–'),
             STCValue::Underscore => Some('_'),
             STCValue::Hashtag => Some('#'),
 
@@ -275,6 +276,20 @@ impl STCValue {
             'y' => Some(STCValue::LowercaseY),
             'z' => Some(STCValue::LowercaseZ),
 
+            '?' => Some(STCValue::QuestionMark),
+            '!' => Some(STCValue::ExclamationMark),
+            '.' => Some(STCValue::Period),
+            ':' => Some(STCValue::Colon),
+            ';' => Some(STCValue::Semicolon),
+            ',' => Some(STCValue::Comma),
+            '/' => Some(STCValue::Slash),
+            '+' => Some(STCValue::Plus),
+            '-' => Some(STCValue::Minus),
+            '*' => Some(STCValue::Asterisk),
+            '–' => Some(STCValue::EmDash),
+            '_' => Some(STCValue::Underscore),
+            '#' => Some(STCValue::Hashtag),
+
             '\n' => Some(STCValue::Newline),
             '\t' => Some(STCValue::Tab),
             ' ' => Some(STCValue::Space),
@@ -360,7 +375,7 @@ impl STCValue {
             STCValue::Plus =>                   0b1100_0110,
             STCValue::Minus =>                  0b1100_0111,
             STCValue::Asterisk =>               0b1100_1000,
-            STCValue::Dash =>                   0b1100_1001,
+            STCValue::EmDash =>                   0b1100_1001,
             STCValue::Underscore =>             0b1100_1010,
             STCValue::Hashtag =>                0b1100_1011,
             // Reserve up to (excluding) 0b1110_0000
@@ -467,7 +482,7 @@ impl STCValue {
             0b1100_0110 => Some(STCValue::Plus),
             0b1100_0111 => Some(STCValue::Minus),
             0b1100_1000 => Some(STCValue::Asterisk),
-            0b1100_1001 => Some(STCValue::Dash),
+            0b1100_1001 => Some(STCValue::EmDash),
             0b1100_1010 => Some(STCValue::Underscore),
             0b1100_1011 => Some(STCValue::Hashtag),
 

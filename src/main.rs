@@ -6,11 +6,12 @@ use crate::util::stc_conversion::*;
 #[derive(Debug, PartialEq)]
 pub struct ArgumentList{
     pub convert_to_stc: Option<String>,                         // --convert-to-stc
+    pub stc_to_string: Option<Vec<u8>>,                         // --stc-to-string
 }
 
 impl ArgumentList{
     pub fn new() -> ArgumentList{
-        ArgumentList{ convert_to_stc: None }
+        ArgumentList{ convert_to_stc: None, stc_to_string: None }
     }
 
 }
@@ -30,6 +31,12 @@ fn main() {
 
         println!("{}", stc_array.iter().map(|x| x.to_string()).collect::<Vec<String>>().join("\n"));
         return;
+    }
+
+    if let Some(stc_values) = args.stc_to_string {
+        let string = stc_to_string(stc_values);
+
+        println!("{}", string);
     }
 }
 
@@ -54,6 +61,10 @@ fn get_arguments_from_list(args: Vec<String>) -> ArgumentList {
                 match flag.as_str() {
                     "--convert-to-stc" => {
                         result.convert_to_stc = Some(value);
+                    }
+
+                    "--stc-to-string" => {
+                        result.stc_to_string = Some(value.split(":").map(|x|x.clone().parse().unwrap()).collect())
                     }
 
                     _=>{
