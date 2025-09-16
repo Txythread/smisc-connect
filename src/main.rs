@@ -29,7 +29,7 @@ fn main() {
     if let Some(string) = args.convert_to_stc {
         let stc_array = ascii_string_to_stc(string.clone());
 
-        println!("{}", stc_array.iter().map(|x| x.to_string()).collect::<Vec<String>>().join("\n"));
+        println!("{}", stc_array.iter().map(|x| x.to_string()).collect::<Vec<String>>().join(":"));
         return;
     }
 
