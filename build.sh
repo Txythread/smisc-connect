@@ -13,5 +13,5 @@ if [ $? -ne 0 ]; then
 	exit 2
 fi
 
-sudo mv target/debug/smisc-connect /usr/local/bin
+sudo --user=root mv target/debug/smisc-connect /usr/local/bin
 
